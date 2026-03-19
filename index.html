@@ -14,7 +14,7 @@
             --glass-bg: rgba(10, 10, 25, 0.85);
         }
 
-        /* RESET DE ENGENHARIA (Clean Code) */
+        /* RESET DE ENGENHARIA */
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body, html {
@@ -24,16 +24,14 @@
             overflow-x: hidden;
         }
 
-        /* FUNDO ESTELAR (Three.js Container) */
         #three-container { position: fixed; top: 0; left: 0; z-index: 1; width: 100%; height: 100%; }
 
-        /* INTERFACE (UI Layer) */
         .ui-wrapper {
             position: relative; z-index: 10; width: 100%;
-            display: flex; justify-content: center;
-            padding: 40px 10px;
+            display: flex; justify-content: center; padding: 40px 10px;
         }
 
+        /* CONTAINER PRINCIPAL */
         .tactical-core {
             background: var(--glass-bg);
             backdrop-filter: blur(25px) saturate(160%);
@@ -42,7 +40,6 @@
             width: 95%; max-width: 1200px;
             box-shadow: 0 0 60px rgba(0,0,0,0.9);
             text-align: center;
-            overflow: hidden; /* Lacre contra vazamento lateral */
         }
 
         h1 {
@@ -53,29 +50,32 @@
             margin-bottom: 40px; text-transform: uppercase; font-weight: 800;
         }
 
-        /* GRID ELÁSTICO (Correção de Layout) */
+        /* GRID ELÁSTICO */
         .showcase { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
-            gap: 20px; width: 100%; margin-bottom: 30px;
+            gap: 25px; width: 100%; margin-bottom: 30px;
             justify-content: center;
         }
 
-        /* UNIT CARD (Bolinha Individual) */
+        /* UNIT CARD (Bolinha com GLOW corrigido) */
         .unit-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px; padding: 20px;
+            border-radius: 20px; padding: 25px;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex; flex-direction: column; align-items: center;
             text-decoration: none; width: 100%;
+            position: relative; /* Para controle do brilho */
         }
 
         .unit-card:hover {
             border-color: var(--neon-blue);
-            transform: translateY(-8px);
-            background: rgba(0, 242, 255, 0.06);
-            box-shadow: 0 15px 30px rgba(0, 242, 255, 0.1);
+            transform: translateY(-10px);
+            background: rgba(0, 242, 255, 0.08);
+            /* O SEGREDO DO BRILHO EXTERNO (GLOW) */
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.4), 
+                        0 0 10px rgba(0, 242, 255, 0.2);
         }
 
         .img-container {
@@ -92,7 +92,10 @@
             transition: 0.5s;
         }
 
-        .unit-card:hover .product-img { transform: scale(1.1); }
+        .unit-card:hover .product-img { 
+            transform: scale(1.1) rotate(2deg);
+            filter: drop-shadow(0 0 15px var(--neon-blue)); /* Brilho na imagem */
+        }
 
         .badge {
             background: var(--neon-green); color: #000;
@@ -112,9 +115,13 @@
             font-size: 0.75rem; transition: 0.3s; width: 100%;
         }
 
-        .unit-card:hover button { background: var(--neon-blue); color: #000; box-shadow: 0 0 15px var(--neon-blue); }
+        .unit-card:hover button { 
+            background: var(--neon-blue); 
+            color: #000; 
+            box-shadow: 0 0 20px var(--neon-blue); 
+        }
 
-        /* FOOTER (Autoria Roger Hernandez) */
+        /* FOOTER */
         footer {
             margin-top: 40px; padding-top: 25px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -152,8 +159,8 @@
             <div class="showcase">
                 <a href="https://amzn.to/4uBoZMz" target="_blank" class="unit-card">
                     <div class="badge">Cupom Ativo</div>
-                    <div class="unit-id">[ ANALYSE: S26-U ]</div>
-                    <div class="img-container"><img src="assets/s26.png" class="product-img" alt="S26 Ultra"></div>
+                    <div class="unit-id">[ S26-U ]</div>
+                    <div class="img-container"><img src="assets/s26.png" class="product-img"></div>
                     <h3>SAMSUNG S26 ULTRA</h3>
                     <div class="price"><span>R$</span> 11.499</div>
                     <button>ADQUIRIR UNIDADE</button>
@@ -161,8 +168,8 @@
 
                 <a href="https://amzn.to/4lxFPI0" target="_blank" class="unit-card">
                     <div class="badge">Frete Grátis</div>
-                    <div class="unit-id">[ ANALYSE: IP17-P ]</div>
-                    <div class="img-container"><img src="assets/iphone17.png" class="product-img" alt="iPhone 17"></div>
+                    <div class="unit-id">[ IP17-P ]</div>
+                    <div class="img-container"><img src="assets/iphone17.png" class="product-img"></div>
                     <h3>IPHONE 17 PRO MAX</h3>
                     <div class="price"><span>R$</span> 10.124</div>
                     <button>ADQUIRIR UNIDADE</button>
@@ -170,8 +177,8 @@
 
                 <a href="https://amzn.to/3PLEEJ6" target="_blank" class="unit-card">
                     <div class="badge">ELETRO500</div>
-                    <div class="unit-id">[ ANALYSE: S25-U ]</div>
-                    <div class="img-container"><img src="assets/s25.png" class="product-img" alt="S25 Ultra"></div>
+                    <div class="unit-id">[ S25-U ]</div>
+                    <div class="img-container"><img src="assets/s25.png" class="product-img"></div>
                     <h3>SAMSUNG S25 ULTRA</h3>
                     <div class="price"><span>R$</span> 6.595</div>
                     <button>ADQUIRIR UNIDADE</button>
@@ -179,8 +186,8 @@
 
                 <a href="https://amzn.to/41clhLN" target="_blank" class="unit-card">
                     <div class="badge">Titânio Deserto</div>
-                    <div class="unit-id">[ ANALYSE: IP16-P ]</div>
-                    <div class="img-container"><img src="assets/iphone16.png" class="product-img" alt="iPhone 16"></div>
+                    <div class="unit-id">[ IP16-P ]</div>
+                    <div class="img-container"><img src="assets/iphone16.png" class="product-img"></div>
                     <h3>IPHONE 16 PRO MAX</h3>
                     <div class="price"><span>R$</span> 12.499</div>
                     <button>ADQUIRIR UNIDADE</button>
@@ -188,14 +195,10 @@
             </div>
 
             <footer>
-                <div class="disclaimer">
-                    Preços dinâmicos via API de afiliados. Valores sujeitos a alteração no checkout final.
-                </div>
+                <div class="disclaimer">Preços dinâmicos via API de afiliados.</div>
                 <div class="copyright-box">
                     <p class="legal-text">© 2026 ROGER HERNANDEZ | ADS - TODOS OS DIREITOS RESERVADOS</p>
-                    <div class="verify-badge">
-                        <span style="font-size: 1rem;">●</span> SISTEMA VERIFICADO E AUDITADO
-                    </div>
+                    <div class="verify-badge"><span>●</span> SISTEMA VERIFICADO E AUDITADO</div>
                 </div>
             </footer>
         </div>
@@ -203,7 +206,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
-        // Função para criar textura redonda (The Circle Fix)
         function createCircleTexture() {
             const canvas = document.createElement('canvas'); canvas.width = 64; canvas.height = 64;
             const ctx = canvas.getContext('2d');
