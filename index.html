@@ -14,7 +14,7 @@
             --glass-bg: rgba(10, 10, 25, 0.9);
         }
 
-        /* RESET PROFISSIONAL */
+        /* RESET PROFISSIONAL (Clean Code) */
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body, html {
@@ -24,14 +24,17 @@
             overflow-x: hidden;
         }
 
+        /* MOTOR GRÁFICO (Fundo Estelar) */
         #three-container { position: fixed; top: 0; left: 0; z-index: 1; width: 100%; height: 100%; }
 
+        /* UI LAYER */
         .ui-wrapper {
             position: relative; z-index: 10; width: 100%;
-            display: flex; justify-content: center; padding: 40px 10px;
+            display: flex; justify-content: center;
+            padding: 40px 10px;
         }
 
-        /* CONTAINER MÃE */
+        /* CONTAINER MÃE (Tactical Core) */
         .tactical-core {
             background: var(--glass-bg);
             backdrop-filter: blur(30px) saturate(160%);
@@ -40,65 +43,63 @@
             width: 98%; max-width: 1200px;
             box-shadow: 0 0 60px rgba(0,0,0,0.9);
             text-align: center;
-            overflow: hidden;
         }
 
         h1 {
-            font-size: clamp(1.5rem, 4vw, 2.5rem); letter-spacing: clamp(4px, 1vw, 12px);
+            font-size: clamp(1.5rem, 4vw, 2.5rem); letter-spacing: clamp(4px, 1.2vw, 12px);
             background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin-bottom: 40px; text-transform: uppercase; font-weight: 800;
+            margin-bottom: 50px; text-transform: uppercase; font-weight: 800;
         }
 
-        /* GRID ESTÁVEL (A ESTEIRA) */
+        /* GRID ESTÁVEL (A Esteira) */
         .showcase { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
-            gap: 25px; width: 100%; padding: 10px;
+            gap: 25px; width: 100%; 
             justify-content: center;
         }
 
-        /* UNIT CARD (A CAIXA DO PRODUTO) */
+        /* UNIT CARD (A Bolinha do Produto) */
         .unit-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px; padding: 25px;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex; flex-direction: column; align-items: center;
+            display: flex; flex-direction: column; 
+            align-items: center; /* CENTRALIZAÇÃO TOTAL */
             text-decoration: none; width: 100%;
-            /* IMPEDE QUE O CARD MUDE DE TAMANHO FÍSICO */
             overflow: hidden; 
         }
 
         .unit-card:hover {
             border-color: var(--neon-blue);
-            transform: translateY(-5px); /* Move apenas para cima, sem alargar */
+            transform: translateY(-8px);
             background: rgba(0, 242, 255, 0.08);
-            box-shadow: 0 0 30px rgba(0, 242, 255, 0.4);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.3);
         }
 
-        /* CONTAINER DA IMAGEM (TRAVADO) */
+        /* CONTAINER DA IMAGEM (A Caixa da Foto) */
         .img-container {
             width: 100%; height: 180px; 
             display: flex; justify-content: center; align-items: center; 
             margin-bottom: 20px;
-            overflow: hidden; /* GARANTE QUE O ZOOM NÃO VASE */
             position: relative;
         }
 
-        /* A IMAGEM (A BOLINHA) */
+        /* A IMAGEM (O Produto com Brilho Redondo) */
         .product-img {
-            max-height: 160px; /* Reduzi um pouco para dar margem de segurança */
-            max-width: 100%; 
-            object-fit: contain; 
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.6));
-            transition: transform 0.5s ease; /* Transição suave apenas no transform */
+            max-height: 160px; max-width: 90%;
+            object-fit: contain;
+            /* LUZ ARREDONDADA: Drop-shadow cria contorno suave, não quadrado */
+            filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.2));
+            transition: 0.5s ease;
         }
 
-        /* EFEITO DE ZOOM SEM EMPURRAR AS BORDAS */
         .unit-card:hover .product-img { 
-            transform: scale(1.1); /* O zoom acontece dentro do overflow:hidden do card */
-            filter: drop-shadow(0 0 15px var(--neon-blue));
+            transform: scale(1.05);
+            /* BRILHO NEON PROFISSIONAL NO HOVER */
+            filter: drop-shadow(0 0 25px var(--neon-blue));
         }
 
         .badge {
@@ -108,24 +109,26 @@
         }
 
         .unit-id { color: #444; font-size: 0.65rem; font-weight: bold; margin-bottom: 8px; }
-        h3 { color: #fff; font-size: 1rem; font-weight: 700; height: 45px; display: flex; align-items: center; }
-        .price { font-size: 2.1rem; color: #fff; font-weight: 800; margin: 15px 0; }
-        .price span { font-size: 0.9rem; color: var(--neon-blue); }
+        h3 { color: #fff; font-size: 0.95rem; font-weight: 700; height: 40px; display: flex; align-items: center; }
+        
+        .price { font-size: 1.9rem; color: #fff; font-weight: 800; margin: 15px 0; }
+        .price span { font-size: 0.9rem; color: var(--neon-blue); margin-right: 4px; }
 
         button {
             background: transparent; border: 1.5px solid var(--neon-blue);
-            color: var(--neon-blue); padding: 14px; border-radius: 10px;
+            color: var(--neon-blue); padding: 12px; border-radius: 10px;
             cursor: pointer; font-weight: 800; text-transform: uppercase;
-            font-size: 0.8rem; width: 100%; transition: 0.3s;
+            font-size: 0.75rem; transition: 0.3s; width: 100%;
         }
 
-        .unit-card:hover button { background: var(--neon-blue); color: #000; box-shadow: 0 0 20px var(--neon-blue); }
+        .unit-card:hover button { background: var(--neon-blue); color: #000; }
 
-        footer { margin-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 30px; }
+        /* FOOTER DE ELITE (Roger Hernandez ADS) */
+        footer { margin-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 25px; }
         .legal-text { color: #666; font-size: 0.7rem; letter-spacing: 1.5px; margin-bottom: 15px; }
         .verify-badge {
             color: var(--neon-green); font-weight: 800; font-size: 0.75rem;
-            border: 1px solid var(--neon-green); padding: 6px 18px; border-radius: 20px;
+            border: 1px solid var(--neon-green); padding: 5px 15px; border-radius: 20px;
             display: inline-flex; align-items: center; gap: 8px;
         }
 
@@ -134,43 +137,49 @@
 </head>
 <body>
     <div id="three-container"></div>
+
     <div class="ui-wrapper">
         <div class="tactical-core">
             <h1>TECH ANALYTICS</h1>
+            
             <div class="showcase">
                 <a href="https://amzn.to/4uBoZMz" target="_blank" class="unit-card">
                     <div class="badge">Cupom Ativo</div>
                     <div class="unit-id">[ S26-U ]</div>
-                    <div class="img-container"><img src="assets/s26.png" class="product-img"></div>
+                    <div class="img-container"><img src="assets/s26.png" class="product-img" alt="S26 Ultra"></div>
                     <h3>SAMSUNG S26 ULTRA</h3>
                     <div class="price"><span>R$</span> 11.499</div>
                     <button>ADQUIRIR UNIDADE</button>
                 </a>
+
                 <a href="https://amzn.to/4lxFPI0" target="_blank" class="unit-card">
                     <div class="badge">Frete Grátis</div>
                     <div class="unit-id">[ IP17-P ]</div>
-                    <div class="img-container"><img src="assets/iphone17.png" class="product-img"></div>
+                    <div class="img-container"><img src="assets/iphone17.png" class="product-img" alt="iPhone 17"></div>
                     <h3>IPHONE 17 PRO MAX</h3>
                     <div class="price"><span>R$</span> 10.124</div>
                     <button>ADQUIRIR UNIDADE</button>
                 </a>
+
                 <a href="https://amzn.to/3PLEEJ6" target="_blank" class="unit-card">
                     <div class="badge">ELETRO500</div>
                     <div class="unit-id">[ S25-U ]</div>
-                    <div class="img-container"><img src="assets/s25.png" class="product-img"></div>
+                    <div class="img-container"><img src="assets/s25.png" class="product-img" alt="S25 Ultra"></div>
                     <h3>SAMSUNG S25 ULTRA</h3>
                     <div class="price"><span>R$</span> 6.595</div>
                     <button>ADQUIRIR UNIDADE</button>
                 </a>
+
                 <a href="https://amzn.to/41clhLN" target="_blank" class="unit-card">
                     <div class="badge">Titânio Deserto</div>
                     <div class="unit-id">[ IP16-P ]</div>
-                    <div class="img-container"><img src="assets/iphone16.png" class="product-img"></div>
+                    <div class="img-container"><img src="assets/iphone16.png" class="product-img" alt="iPhone 16"></div>
                     <h3>IPHONE 16 PRO MAX</h3>
                     <div class="price"><span>R$</span> 12.499</div>
                     <button>ADQUIRIR UNIDADE</button>
                 </a>
             </div>
+
             <footer>
                 <p class="legal-text">© 2026 ROGER HERNANDEZ | ADS - TODOS OS DIREITOS RESERVADOS</p>
                 <div class="verify-badge">● SISTEMA VERIFICADO E AUDITADO</div>
@@ -190,20 +199,39 @@
             ctx.fillStyle = gradient; ctx.fillRect(0, 0, 64, 64);
             return new THREE.CanvasTexture(canvas);
         }
+
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.getElementById('three-container').appendChild(renderer.domElement);
+
         const starsGeometry = new THREE.BufferGeometry();
         const starsVertices = [];
         for (let i = 0; i < 7000; i++) { starsVertices.push(Math.random()*2000-1000, Math.random()*2000-1000, Math.random()*2000-1000); }
         starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starsVertices, 3));
-        const starsMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 2.5, map: createCircleTexture(), transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
-        const stars = new THREE.Points(starsGeometry, starsMaterial); scene.add(stars);
+
+        const starsMaterial = new THREE.PointsMaterial({ 
+            color: 0xffffff, size: 2.5, map: createCircleTexture(), 
+            transparent: true, opacity: 0.9, depthWrite: false, 
+            blending: THREE.AdditiveBlending 
+        });
+
+        const stars = new THREE.Points(starsGeometry, starsMaterial);
+        scene.add(stars);
+
         camera.position.z = 5;
-        function animate() { requestAnimationFrame(animate); stars.rotation.y += 0.0004; renderer.render(scene, camera); }
-        window.addEventListener('resize', () => { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
+        function animate() {
+            requestAnimationFrame(animate);
+            stars.rotation.y += 0.0004;
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
         animate();
     </script>
 </body>
