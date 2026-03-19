@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tech Analytics | Monitor Elite</title>
+    <title>Tech Analytics | Monitor de Mercado Elite</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -14,14 +14,14 @@
             --glass-bg: rgba(10, 10, 25, 0.9);
         }
 
-        /* RESET DE ENGENHARIA */
+        /* RESET PROFISSIONAL */
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body, html {
             width: 100%; min-height: 100vh;
             background-color: var(--deep-black);
             font-family: 'Montserrat', sans-serif;
-            overflow-x: hidden; /* CANCELA QUALQUER VAZAMENTO LATERAL */
+            overflow-x: hidden;
         }
 
         #three-container { position: fixed; top: 0; left: 0; z-index: 1; width: 100%; height: 100%; }
@@ -31,93 +31,101 @@
             display: flex; justify-content: center; padding: 40px 10px;
         }
 
+        /* CONTAINER MÃE */
         .tactical-core {
             background: var(--glass-bg);
             backdrop-filter: blur(30px) saturate(160%);
             border: 1px solid rgba(0, 242, 255, 0.2);
-            border-radius: 30px; padding: 40px 15px;
+            border-radius: 30px; padding: 40px 20px;
             width: 98%; max-width: 1200px;
             box-shadow: 0 0 60px rgba(0,0,0,0.9);
             text-align: center;
-            overflow: hidden; /* NADA SAI DAQUI */
+            overflow: hidden;
         }
 
         h1 {
-            font-size: clamp(1.5rem, 4vw, 2.5rem); letter-spacing: clamp(4px, 1.2vw, 12px);
+            font-size: clamp(1.5rem, 4vw, 2.5rem); letter-spacing: clamp(4px, 1vw, 12px);
             background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
             margin-bottom: 40px; text-transform: uppercase; font-weight: 800;
         }
 
-        /* GRID TOTALMENTE CONTROLADO */
+        /* GRID ESTÁVEL (A ESTEIRA) */
         .showcase { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
-            gap: 20px; width: 100%; padding: 10px;
+            gap: 25px; width: 100%; padding: 10px;
             justify-content: center;
         }
 
+        /* UNIT CARD (A CAIXA DO PRODUTO) */
         .unit-card {
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px; padding: 20px;
+            border-radius: 20px; padding: 25px;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex; flex-direction: column; align-items: center;
-            text-decoration: none;
-            width: 100%;
-            max-width: 100%; /* IMPEDE QUE O CARD CRESÇA ALÉM DO GRID */
+            text-decoration: none; width: 100%;
+            /* IMPEDE QUE O CARD MUDE DE TAMANHO FÍSICO */
+            overflow: hidden; 
         }
 
-        /* GLOW NEON SEM QUEBRAR O LAYOUT */
         .unit-card:hover {
             border-color: var(--neon-blue);
-            transform: translateY(-8px);
+            transform: translateY(-5px); /* Move apenas para cima, sem alargar */
             background: rgba(0, 242, 255, 0.08);
-            box-shadow: 0 0 25px rgba(0, 242, 255, 0.4);
+            box-shadow: 0 0 30px rgba(0, 242, 255, 0.4);
         }
 
+        /* CONTAINER DA IMAGEM (TRAVADO) */
         .img-container {
             width: 100%; height: 180px; 
             display: flex; justify-content: center; align-items: center; 
-            margin-bottom: 15px;
-            overflow: hidden; /* GARANTE QUE A FOTO NÃO VASE DO CARD */
+            margin-bottom: 20px;
+            overflow: hidden; /* GARANTE QUE O ZOOM NÃO VASE */
+            position: relative;
         }
 
+        /* A IMAGEM (A BOLINHA) */
         .product-img {
-            max-height: 100%; 
-            max-width: 100%; /* A FOTO É ESCRAVA DO CONTAINER */
-            object-fit: contain; /* NUNCA DISTORCE OU EMPURRA O CARD */
+            max-height: 160px; /* Reduzi um pouco para dar margem de segurança */
+            max-width: 100%; 
+            object-fit: contain; 
             filter: drop-shadow(0 10px 15px rgba(0,0,0,0.6));
-            transition: 0.5s;
+            transition: transform 0.5s ease; /* Transição suave apenas no transform */
         }
 
-        .unit-card:hover .product-img { transform: scale(1.1); filter: drop-shadow(0 0 15px var(--neon-blue)); }
+        /* EFEITO DE ZOOM SEM EMPURRAR AS BORDAS */
+        .unit-card:hover .product-img { 
+            transform: scale(1.1); /* O zoom acontece dentro do overflow:hidden do card */
+            filter: drop-shadow(0 0 15px var(--neon-blue));
+        }
 
         .badge {
             background: var(--neon-green); color: #000;
             font-size: 0.6rem; font-weight: 900; padding: 4px 10px;
-            border-radius: 4px; margin-bottom: 10px; text-transform: uppercase;
+            border-radius: 4px; margin-bottom: 12px; text-transform: uppercase;
         }
 
-        .unit-id { color: #444; font-size: 0.6rem; font-weight: bold; margin-bottom: 5px; }
-        h3 { color: #fff; font-size: 0.95rem; font-weight: 700; height: 40px; display: flex; align-items: center; }
-        .price { font-size: 1.8rem; color: #fff; font-weight: 800; margin: 15px 0; }
-        .price span { font-size: 0.8rem; color: var(--neon-blue); }
+        .unit-id { color: #444; font-size: 0.65rem; font-weight: bold; margin-bottom: 8px; }
+        h3 { color: #fff; font-size: 1rem; font-weight: 700; height: 45px; display: flex; align-items: center; }
+        .price { font-size: 2.1rem; color: #fff; font-weight: 800; margin: 15px 0; }
+        .price span { font-size: 0.9rem; color: var(--neon-blue); }
 
         button {
             background: transparent; border: 1.5px solid var(--neon-blue);
-            color: var(--neon-blue); padding: 12px; border-radius: 8px;
+            color: var(--neon-blue); padding: 14px; border-radius: 10px;
             cursor: pointer; font-weight: 800; text-transform: uppercase;
-            font-size: 0.75rem; width: 100%;
+            font-size: 0.8rem; width: 100%; transition: 0.3s;
         }
 
-        .unit-card:hover button { background: var(--neon-blue); color: #000; }
+        .unit-card:hover button { background: var(--neon-blue); color: #000; box-shadow: 0 0 20px var(--neon-blue); }
 
-        footer { margin-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 25px; }
-        .legal-text { color: #666; font-size: 0.65rem; letter-spacing: 1.5px; margin-bottom: 15px; }
+        footer { margin-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 30px; }
+        .legal-text { color: #666; font-size: 0.7rem; letter-spacing: 1.5px; margin-bottom: 15px; }
         .verify-badge {
             color: var(--neon-green); font-weight: 800; font-size: 0.75rem;
-            border: 1px solid var(--neon-green); padding: 5px 15px; border-radius: 20px;
+            border: 1px solid var(--neon-green); padding: 6px 18px; border-radius: 20px;
             display: inline-flex; align-items: center; gap: 8px;
         }
 
@@ -169,6 +177,7 @@
             </footer>
         </div>
     </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
         function createCircleTexture() {
@@ -190,7 +199,7 @@
         const starsVertices = [];
         for (let i = 0; i < 7000; i++) { starsVertices.push(Math.random()*2000-1000, Math.random()*2000-1000, Math.random()*2000-1000); }
         starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starsVertices, 3));
-        const starsMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 2.5, map: createCircleTexture(), transparent: true, blending: THREE.AdditiveBlending });
+        const starsMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 2.5, map: createCircleTexture(), transparent: true, blending: THREE.AdditiveBlending, depthWrite: false });
         const stars = new THREE.Points(starsGeometry, starsMaterial); scene.add(stars);
         camera.position.z = 5;
         function animate() { requestAnimationFrame(animate); stars.rotation.y += 0.0004; renderer.render(scene, camera); }
