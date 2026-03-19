@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tech Analytics | Monitor de Mercado Elite</title>
+    <title>Tech Analytics | Monitor Elite</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -11,276 +11,168 @@
             --neon-purple: #bd00ff;
             --neon-green: #00ff88;
             --deep-black: #010103;
-            --glass-bg: rgba(10, 10, 25, 0.75);
+            --glass-bg: rgba(10, 10, 25, 0.85);
         }
 
-        /* RESET PROFISSIONAL (Clean Code) */
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body, html {
             width: 100%; min-height: 100vh;
             background-color: var(--deep-black);
             font-family: 'Montserrat', sans-serif;
-            overflow-x: hidden; /* Impede o vazamento lateral total */
+            overflow-x: hidden;
         }
 
-        /* CONTAINER DO THREE.JS (Fundo Estelar) */
         #three-container { position: fixed; top: 0; left: 0; z-index: 1; width: 100%; height: 100%; }
 
-        /* WRAPPER PRINCIPAL (ADS Positioning Logic) */
         .ui-wrapper {
             position: relative; z-index: 10; width: 100%;
-            display: flex; justify-content: center;
-            padding: 60px 20px;
+            display: flex; justify-content: center; padding: 40px 10px;
         }
 
-        /* CORE TÁTICO (A Caixa Glassmorphism) */
         .tactical-core {
             background: var(--glass-bg);
-            backdrop-filter: blur(35px) saturate(180%);
+            backdrop-filter: blur(25px);
             border: 1px solid rgba(0, 242, 255, 0.2);
-            border-radius: 40px; padding: 50px 40px;
-            width: 100%; max-width: 1300px;
-            box-shadow: 0 0 100px rgba(0,0,0,0.9);
+            border-radius: 30px; padding: 40px 20px;
+            width: 95%; max-width: 1200px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
             text-align: center;
-            overflow: hidden; /* Impede vazamento interno */
+            overflow: hidden; /* Lacre de segurança */
         }
 
-        /* TÍTULO NEON */
         h1 {
-            font-size: clamp(1.8rem, 5vw, 2.8rem); letter-spacing: 12px;
+            font-size: clamp(1.5rem, 4vw, 2.5rem); letter-spacing: clamp(4px, 1vw, 10px);
             background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 15px var(--neon-blue)); margin-bottom: 50px;
-            text-transform: uppercase; font-weight: 800;
+            margin-bottom: 40px; text-transform: uppercase; font-weight: 800;
         }
 
-        /* GRID SHOWCASE (Correção do Vazamento) */
         .showcase { 
             display: grid; 
-            /* AJUSTE TÁTICO: minmax menor e justify-content para garantir alinhamento */
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); 
-            gap: 25px; 
-            margin-bottom: 40px;
-            justify-content: center;
-            width: 100%;
+            /* REDUZIDO O MINMAX PARA 200PX PARA CABER TUDO */
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 20px; width: 100%; margin-bottom: 30px;
         }
 
-        /* UNIT CARD (A Bolinha do Produto) */
         .unit-card {
             background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px; padding: 25px;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: flex; flex-direction: column; align-items: center;
-            cursor: pointer; text-decoration: none;
-            width: 100%; /* Garante que preencha a coluna do grid */
-            overflow: hidden; /* Impede vazamento interno */
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px; padding: 20px;
+            transition: 0.4s; display: flex; flex-direction: column;
+            align-items: center; text-decoration: none; width: 100%;
         }
 
         .unit-card:hover {
-            border-color: var(--neon-blue);
-            transform: translateY(-12px) scale(1.02);
+            border-color: var(--neon-blue); transform: translateY(-5px);
             background: rgba(0, 242, 255, 0.05);
-            box-shadow: 0 20px 50px rgba(0, 242, 255, 0.15);
         }
 
-        /* CONTAINER DA IMAGEM */
         .img-container {
-            width: 100%; height: 200px; /* Reduzi um pouco a altura */
-            display: flex; justify-content: center; align-items: center;
-            margin-bottom: 20px;
-            background: radial-gradient(circle, rgba(0, 242, 255, 0.1) 0%, transparent 75%);
-            border-radius: 20px;
+            width: 100%; height: 180px; display: flex;
+            justify-content: center; align-items: center; margin-bottom: 15px;
         }
 
-        /* PRODUTO IMG (Correção de Tamanho) */
         .product-img {
-            max-height: 170px; /* Reduzi a altura máxima */
-            max-width: 85%; /* Limitei a largura máxima */
-            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));
-            transition: 0.6s;
-            object-fit: contain; /* Mantém a proporção sem distorcer */
+            max-height: 100%; max-width: 100%;
+            object-fit: contain; /* Não deixa a bolinha estourar a caixa */
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
         }
 
-        .unit-card:hover .product-img {
-            filter: drop-shadow(0 15px 35px var(--neon-blue));
-            transform: scale(1.1) rotate(2deg);
-        }
-
-        /* BADGE E TEXTOS */
         .badge {
             background: var(--neon-green); color: #000;
-            font-size: 0.65rem; font-weight: 900; padding: 5px 12px;
-            border-radius: 50px; margin-bottom: 12px;
-            text-transform: uppercase; letter-spacing: 1px;
+            font-size: 0.6rem; font-weight: 900; padding: 4px 8px;
+            border-radius: 4px; margin-bottom: 10px; text-transform: uppercase;
         }
 
-        .unit-id { color: #555; font-size: 0.7rem; font-weight: bold; margin-bottom: 8px; }
-        h3 { color: #fff; font-size: 1.1rem; margin: 0; font-weight: 700; text-transform: uppercase; }
-        .price { font-size: 2.2rem; color: #fff; font-weight: 800; margin: 18px 0; }
-        .price span { font-size: 1rem; color: var(--neon-blue); margin-right: 5px; }
+        .unit-id { color: #444; font-size: 0.6rem; margin-bottom: 5px; }
+        h3 { color: #fff; font-size: 0.9rem; font-weight: 700; height: 40px; }
+        .price { font-size: 1.8rem; color: #fff; font-weight: 800; margin: 15px 0; }
+        .price span { font-size: 0.8rem; color: var(--neon-blue); }
 
-        /* BOTÃO ADQUIRIR */
         button {
-            background: transparent; border: 2px solid var(--neon-blue);
-            color: var(--neon-blue); padding: 15px 20px; border-radius: 12px;
-            cursor: pointer; font-weight: 800; text-transform: uppercase;
-            font-size: 0.8rem; transition: 0.3s; width: 100%;
-            letter-spacing: 1.5px;
+            background: transparent; border: 1px solid var(--neon-blue);
+            color: var(--neon-blue); padding: 12px; border-radius: 8px;
+            cursor: pointer; font-weight: 800; font-size: 0.7rem;
+            width: 100%; text-transform: uppercase;
         }
 
-        .unit-card:hover button { background: var(--neon-blue); color: #000; box-shadow: 0 0 20px var(--neon-blue); }
+        .unit-card:hover button { background: var(--neon-blue); color: #000; }
 
-        /* FOOTER DE ELITE (ADS Integrity) */
-        footer {
-            margin-top: 50px; padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .disclaimer {
-            color: #444; font-size: 0.6rem; margin-bottom: 20px; font-weight: 400;
-            max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.5;
-        }
-
-        .copyright-box {
-            display: flex; flex-direction: column; gap: 10px; align-items: center;
-        }
-
-        .legal-text {
-            color: #888; font-size: 0.7rem; letter-spacing: 2px; text-transform: uppercase;
-        }
-
+        footer { margin-top: 40px; border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 20px; }
+        .disclaimer { color: #333; font-size: 0.55rem; margin-bottom: 15px; }
+        .legal-text { color: #666; font-size: 0.6rem; letter-spacing: 1px; }
         .verify-badge {
-            color: var(--neon-green); font-weight: 800; font-size: 0.75rem;
-            border: 1px solid var(--neon-green); padding: 5px 15px; border-radius: 20px;
-            display: inline-flex; align-items: center; gap: 8px;
-        }
-
-        /* RESPONSIVIDADE (ADS Logic) */
-        @media (max-width: 768px) {
-            .tactical-core { padding: 30px 20px; }
-            h1 { letter-spacing: 6px; }
-            .showcase { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+            margin-top: 10px; color: var(--neon-green); font-weight: 800; font-size: 0.7rem;
+            border: 1px solid var(--neon-green); padding: 4px 12px; border-radius: 20px;
+            display: inline-block;
         }
     </style>
 </head>
 <body>
     <div id="three-container"></div>
-
     <div class="ui-wrapper">
         <div class="tactical-core">
             <h1>TECH ANALYTICS</h1>
-            
             <div class="showcase">
                 <a href="https://amzn.to/4uBoZMz" target="_blank" class="unit-card">
                     <div class="badge">Cupom Ativo</div>
-                    <div class="unit-id">[ ANALYSE: S26-U ]</div>
-                    <div class="img-container"><img src="assets/s26.png" class="product-img" alt="S26 Ultra"></div>
+                    <div class="unit-id">[ S26-U ]</div>
+                    <div class="img-container"><img src="assets/s26.png" class="product-img"></div>
                     <h3>SAMSUNG S26 ULTRA</h3>
                     <div class="price"><span>R$</span> 11.499</div>
                     <button>ADQUIRIR UNIDADE</button>
                 </a>
-
                 <a href="https://amzn.to/4lxFPI0" target="_blank" class="unit-card">
                     <div class="badge">Frete Grátis</div>
-                    <div class="unit-id">[ ANALYSE: IP17-P ]</div>
-                    <div class="img-container"><img src="assets/iphone17.png" class="product-img" alt="iPhone 17"></div>
+                    <div class="unit-id">[ IP17-P ]</div>
+                    <div class="img-container"><img src="assets/iphone17.png" class="product-img"></div>
                     <h3>IPHONE 17 PRO MAX</h3>
                     <div class="price"><span>R$</span> 10.124</div>
                     <button>ADQUIRIR UNIDADE</button>
                 </a>
-
                 <a href="https://amzn.to/3PLEEJ6" target="_blank" class="unit-card">
                     <div class="badge">ELETRO500</div>
-                    <div class="unit-id">[ ANALYSE: S25-U ]</div>
-                    <div class="img-container"><img src="assets/s25.png" class="product-img" alt="S25 Ultra"></div>
+                    <div class="unit-id">[ S25-U ]</div>
+                    <div class="img-container"><img src="assets/s25.png" class="product-img"></div>
                     <h3>SAMSUNG S25 ULTRA</h3>
                     <div class="price"><span>R$</span> 6.595</div>
                     <button>ADQUIRIR UNIDADE</button>
                 </a>
-
                 <a href="https://amzn.to/41clhLN" target="_blank" class="unit-card">
                     <div class="badge">Titânio Deserto</div>
-                    <div class="unit-id">[ ANALYSE: IP16-P ]</div>
-                    <div class="img-container"><img src="assets/iphone16.png" class="product-img" alt="iPhone 16"></div>
+                    <div class="unit-id">[ IP16-P ]</div>
+                    <div class="img-container"><img src="assets/iphone16.png" class="product-img"></div>
                     <h3>IPHONE 16 PRO MAX</h3>
                     <div class="price"><span>R$</span> 12.499</div>
                     <button>ADQUIRIR UNIDADE</button>
                 </a>
             </div>
-
             <footer>
-                <div class="disclaimer">
-                    Preços dinâmicos baseados em tempo real via API de afiliados. Os valores podem sofrer alteração no checkout final da loja parceira.
-                </div>
-                
+                <div class="disclaimer">Preços dinâmicos baseados em tempo real via API.</div>
                 <div class="copyright-box">
-                    <span class="legal-text">© 2026 ROGER HERNANDEZ | ADS - TODOS OS DIREITOS RESERVADOS</span>
-                    <div class="verify-badge">
-                        <span style="font-size: 1.2rem;">●</span> SISTEMA VERIFICADO E AUDITADO
-                    </div>
+                    <div class="legal-text">© 2026 ROGER HERNANDEZ | ADS - TODOS OS DIREITOS RESERVADOS</div>
+                    <div class="verify-badge">● SISTEMA VERIFICADO E AUDITADO</div>
                 </div>
             </footer>
         </div>
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script>
-        function createCircleTexture() {
-            const canvas = document.createElement('canvas'); canvas.width = 64; canvas.height = 64;
-            const ctx = canvas.getContext('2d');
-            const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
-            gradient.addColorStop(0, 'rgba(255, 255, 255, 1)');
-            gradient.addColorStop(1, 'rgba(255, 255, 255, 0)');
-            ctx.fillStyle = gradient; ctx.fillRect(0, 0, 64, 64);
-            return new THREE.CanvasTexture(canvas);
-        }
-
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setClearColor(0x010103, 1);
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.getElementById('three-container').appendChild(renderer.domElement);
-
         const starsGeometry = new THREE.BufferGeometry();
         const starsVertices = [];
-        // Mantive a quantidade de estrelas para o visual ser idêntico
-        for (let i = 0; i < 10000; i++) { 
-            starsVertices.push(Math.random()*2000-1000, Math.random()*2000-1000, Math.random()*2000-1000); 
-        }
+        for (let i = 0; i < 5000; i++) { starsVertices.push(Math.random()*2000-1000, Math.random()*2000-1000, Math.random()*2000-1000); }
         starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starsVertices, 3));
-        const starsMaterial = new THREE.PointsMaterial({ 
-            color: 0xffffff, size: 2.2, map: createCircleTexture(), 
-            transparent: true, opacity: 1, depthWrite: false, 
-            blending: THREE.AdditiveBlending 
-        });
-        const stars = new THREE.Points(starsGeometry, starsMaterial);
-        scene.add(stars);
-
-        const pLight = new THREE.PointLight(0xbd00ff, 4, 700); pLight.position.set(250, 150, 150); scene.add(pLight);
-        const bLight = new THREE.PointLight(0x00f2ff, 4, 700); bLight.position.set(-250, -150, 150); scene.add(bLight);
-        
-        scene.fog = new THREE.FogExp2(0x010103, 0.002);
+        const starsMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 1.5, transparent: true });
+        const stars = new THREE.Points(starsGeometry, starsMaterial); scene.add(stars);
         camera.position.z = 5;
-
-        function animate() {
-            requestAnimationFrame(animate);
-            stars.rotation.y += 0.0004;
-            stars.rotation.x += 0.0001;
-            const time = Date.now() * 0.0005;
-            pLight.position.x = Math.sin(time) * 300;
-            bLight.position.y = Math.cos(time) * 300;
-            renderer.render(scene, camera);
-        }
-
-        window.addEventListener('resize', () => {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        });
-
+        function animate() { requestAnimationFrame(animate); stars.rotation.y += 0.0005; renderer.render(scene, camera); }
+        window.addEventListener('resize', () => { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); });
         animate();
     </script>
 </body>
