@@ -6,173 +6,201 @@
     <title>Tech Analytics | Monitor de Mercado Elite</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap" rel="stylesheet">
     <style>
-        /* (c) 2026 Roger Hernandez - ADS */
         :root {
             --neon-blue: #00f2ff;
             --neon-purple: #bd00ff;
             --neon-green: #00ff88;
             --deep-black: #010103;
+            --glass-bg: rgba(10, 10, 25, 0.75);
         }
 
+        * { box-sizing: border-box; }
+
         body, html {
-            margin: 0; padding: 0; width: 100%; height: 100%;
+            margin: 0; padding: 0; width: 100%; min-height: 100%;
             background-color: var(--deep-black);
             font-family: 'Montserrat', sans-serif;
-            overflow-x: hidden; display: flex;
-            justify-content: center; align-items: flex-start;
-            padding: 40px 0;
+            overflow-x: hidden;
         }
 
         #three-container { position: fixed; top: 0; left: 0; z-index: 1; width: 100%; height: 100%; }
 
-        .ui-overlay {
-            position: relative; z-index: 10; width: 95%; max-width: 1300px;
-            display: flex; justify-content: center; align-items: center;
+        .ui-wrapper {
+            position: relative; z-index: 10; width: 100%;
+            display: flex; flex-direction: column; align-items: center;
+            padding: 60px 20px;
         }
 
         .tactical-core {
-            background: rgba(10, 10, 25, 0.75);
+            background: var(--glass-bg);
             backdrop-filter: blur(35px) saturate(180%);
-            border: 1px solid rgba(0, 242, 255, 0.3);
-            border-radius: 40px; padding: 40px;
-            width: 100%;
+            border: 1px solid rgba(0, 242, 255, 0.2);
+            border-radius: 40px; padding: 50px 40px;
+            width: 100%; max-width: 1300px;
             box-shadow: 0 0 100px rgba(0,0,0,0.9);
             text-align: center;
         }
 
         h1 {
-            font-size: 2.5rem; letter-spacing: 12px;
+            font-size: clamp(1.8rem, 5vw, 2.8rem); letter-spacing: 12px;
             background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 0 15px var(--neon-blue)); margin-bottom: 40px;
+            filter: drop-shadow(0 0 15px var(--neon-blue)); margin-bottom: 50px;
             text-transform: uppercase; font-weight: 800;
         }
 
-        /* GRID RESPONSIVO (ADS Logic: Mobile First) */
         .showcase { 
             display: grid; 
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); 
             gap: 25px; 
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
 
         .unit-card {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px; padding: 25px;
-            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 24px; padding: 25px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             display: flex; flex-direction: column; align-items: center;
-            cursor: pointer;
+            cursor: pointer; text-decoration: none;
         }
 
         .unit-card:hover {
             border-color: var(--neon-blue);
-            transform: translateY(-10px);
+            transform: translateY(-12px) scale(1.02);
             background: rgba(0, 242, 255, 0.05);
-            box-shadow: 0 15px 45px rgba(0, 242, 255, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 242, 255, 0.15);
         }
 
         .img-container {
             width: 100%; height: 220px;
             display: flex; justify-content: center; align-items: center;
-            margin-bottom: 15px;
-            background: radial-gradient(circle, rgba(0, 242, 255, 0.08) 0%, transparent 70%);
-            border-radius: 15px;
+            margin-bottom: 20px;
+            background: radial-gradient(circle, rgba(0, 242, 255, 0.1) 0%, transparent 75%);
+            border-radius: 20px;
         }
 
         .product-img {
-            max-height: 190px; max-width: 90%;
-            filter: drop-shadow(0 10px 15px rgba(0,0,0,0.6));
-            transition: 0.5s;
+            max-height: 180px; max-width: 85%;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.8));
+            transition: 0.6s;
         }
 
         .unit-card:hover .product-img {
-            filter: drop-shadow(0 20px 40px var(--neon-blue));
-            transform: scale(1.1);
+            filter: drop-shadow(0 15px 35px var(--neon-blue));
+            transform: scale(1.1) rotate(2deg);
         }
 
         .badge {
             background: var(--neon-green); color: #000;
-            font-size: 0.6rem; font-weight: 900; padding: 4px 10px;
-            border-radius: 50px; margin-bottom: 10px;
-            text-transform: uppercase;
+            font-size: 0.65rem; font-weight: 900; padding: 5px 12px;
+            border-radius: 50px; margin-bottom: 12px;
+            text-transform: uppercase; letter-spacing: 1px;
         }
 
-        .unit-id { color: #666; font-size: 0.65rem; font-weight: bold; margin-bottom: 5px; }
-        h3 { color: #fff; font-size: 1.1rem; margin: 0; font-weight: 700; text-transform: uppercase; }
-        .price { font-size: 2.2rem; color: #fff; font-weight: 800; margin: 15px 0; }
-        .price span { font-size: 1rem; opacity: 0.7; margin-right: 5px; }
+        .unit-id { color: #555; font-size: 0.7rem; font-weight: bold; margin-bottom: 8px; }
+        h3 { color: #fff; font-size: 1.15rem; margin: 0; font-weight: 700; text-transform: uppercase; }
+        .price { font-size: 2.3rem; color: #fff; font-weight: 800; margin: 18px 0; }
+        .price span { font-size: 1rem; color: var(--neon-blue); margin-right: 5px; }
 
         button {
             background: transparent; border: 2px solid var(--neon-blue);
-            color: var(--neon-blue); padding: 14px 20px; border-radius: 10px;
-            cursor: pointer; font-weight: 700; text-transform: uppercase;
-            font-size: 0.8rem; transition: 0.3s; width: 100%;
-            letter-spacing: 1px;
+            color: var(--neon-blue); padding: 15px 20px; border-radius: 12px;
+            cursor: pointer; font-weight: 800; text-transform: uppercase;
+            font-size: 0.85rem; transition: 0.3s; width: 100%;
+            letter-spacing: 1.5px;
         }
 
-        .unit-card:hover button { background: var(--neon-blue); color: #000; }
+        .unit-card:hover button { background: var(--neon-blue); color: #000; box-shadow: 0 0 20px var(--neon-blue); }
 
-        .footer-verify {
-            margin-top: 30px; padding-top: 20px;
+        /* FOOTER DE ELITE (ADS Integrity) */
+        footer {
+            margin-top: 50px; padding-top: 30px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #555; font-size: 0.7rem; letter-spacing: 2px;
-            text-transform: uppercase;
         }
 
-        .verify-badge { color: var(--neon-green); font-weight: 800; margin-left: 5px; }
+        .disclaimer {
+            color: #444; font-size: 0.65rem; margin-bottom: 20px; font-weight: 400;
+            max-width: 800px; margin-left: auto; margin-right: auto; line-height: 1.5;
+        }
 
-        @media (max-width: 600px) { h1 { font-size: 1.8rem; letter-spacing: 6px; } }
+        .copyright-box {
+            display: flex; flex-direction: column; gap: 10px; align-items: center;
+        }
+
+        .legal-text {
+            color: #888; font-size: 0.75rem; letter-spacing: 2px; text-transform: uppercase;
+        }
+
+        .verify-badge {
+            color: var(--neon-green); font-weight: 800; font-size: 0.8rem;
+            border: 1px solid var(--neon-green); padding: 5px 15px; border-radius: 20px;
+            display: inline-flex; align-items: center; gap: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .tactical-core { padding: 30px 20px; }
+            h1 { letter-spacing: 6px; }
+        }
     </style>
 </head>
 <body>
     <div id="three-container"></div>
 
-    <div class="ui-overlay">
+    <div class="ui-wrapper">
         <div class="tactical-core">
             <h1>TECH ANALYTICS</h1>
             
             <div class="showcase">
-                <div class="unit-card" onclick="window.open('https://amzn.to/4uBoZMz', '_blank')">
+                <a href="https://amzn.to/4uBoZMz" target="_blank" class="unit-card">
                     <div class="badge">Cupom Ativo</div>
                     <div class="unit-id">[ ANALYSE: S26-U ]</div>
-                    <div class="img-container"><img src="assets/s26.png" class="product-img"></div>
+                    <div class="img-container"><img src="assets/s26.png" class="product-img" alt="S26 Ultra"></div>
                     <h3>SAMSUNG S26 ULTRA</h3>
                     <div class="price"><span>R$</span> 11.499</div>
                     <button>ADQUIRIR UNIDADE</button>
-                </div>
+                </a>
 
-                <div class="unit-card" onclick="window.open('https://amzn.to/4lxFPI0', '_blank')">
+                <a href="https://amzn.to/4lxFPI0" target="_blank" class="unit-card">
                     <div class="badge">Frete Grátis</div>
                     <div class="unit-id">[ ANALYSE: IP17-P ]</div>
-                    <div class="img-container"><img src="assets/iphone17.png" class="product-img"></div>
+                    <div class="img-container"><img src="assets/iphone17.png" class="product-img" alt="iPhone 17"></div>
                     <h3>IPHONE 17 PRO MAX</h3>
                     <div class="price"><span>R$</span> 10.124</div>
                     <button>ADQUIRIR UNIDADE</button>
-                </div>
+                </a>
 
-                <div class="unit-card" onclick="window.open('https://amzn.to/3PLEEJ6', '_blank')">
+                <a href="https://amzn.to/3PLEEJ6" target="_blank" class="unit-card">
                     <div class="badge">ELETRO500</div>
                     <div class="unit-id">[ ANALYSE: S25-U ]</div>
-                    <div class="img-container"><img src="assets/s25.png" class="product-img"></div>
+                    <div class="img-container"><img src="assets/s25.png" class="product-img" alt="S25 Ultra"></div>
                     <h3>SAMSUNG S25 ULTRA</h3>
                     <div class="price"><span>R$</span> 6.595</div>
                     <button>ADQUIRIR UNIDADE</button>
-                </div>
+                </a>
 
-                <div class="unit-card" onclick="window.open('https://amzn.to/41clhLN', '_blank')">
+                <a href="https://amzn.to/41clhLN" target="_blank" class="unit-card">
                     <div class="badge">Titânio Deserto</div>
                     <div class="unit-id">[ ANALYSE: IP16-P ]</div>
-                    <div class="img-container"><img src="assets/iphone16.png" class="product-img"></div>
+                    <div class="img-container"><img src="assets/iphone16.png" class="product-img" alt="iPhone 16"></div>
                     <h3>IPHONE 16 PRO MAX</h3>
                     <div class="price"><span>R$</span> 12.499</div>
                     <button>ADQUIRIR UNIDADE</button>
-                </div>
+                </a>
             </div>
 
-            <div class="footer-verify">
-                © 2026 Roger Hernandez | ADS <span class="verify-badge">● SISTEMA VERIFICADO</span>
-            </div>
+            <footer>
+                <div class="disclaimer">
+                    Preços dinâmicos baseados em tempo real via API de afiliados. Os valores podem sofrer alteração no checkout final da loja parceira.
+                </div>
+                
+                <div class="copyright-box">
+                    <span class="legal-text">© 2026 ROGER HERNANDEZ | ADS - TODOS OS DIREITOS RESERVADOS</span>
+                    <div class="verify-badge">
+                        <span style="font-size: 1.2rem;">●</span> SISTEMA VERIFICADO E AUDITADO
+                    </div>
+                </div>
+            </footer>
         </div>
     </div>
 
@@ -187,23 +215,51 @@
             ctx.fillStyle = gradient; ctx.fillRect(0, 0, 64, 64);
             return new THREE.CanvasTexture(canvas);
         }
+
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
         const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setClearColor(0x010103, 1); renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setClearColor(0x010103, 1);
+        renderer.setSize(window.innerWidth, window.innerHeight);
         document.getElementById('three-container').appendChild(renderer.domElement);
+
         const starsGeometry = new THREE.BufferGeometry();
         const starsVertices = [];
-        for (let i = 0; i < 10000; i++) { starsVertices.push(Math.random()*2000-1000, Math.random()*2000-1000, Math.random()*2000-1000); }
+        for (let i = 0; i < 8000; i++) { 
+            starsVertices.push(Math.random()*2000-1000, Math.random()*2000-1000, Math.random()*2000-1000); 
+        }
         starsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(starsVertices, 3));
-        const starsMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 2.2, map: createCircleTexture(), transparent: true, opacity: 1, depthWrite: false, blending: THREE.AdditiveBlending });
-        const stars = new THREE.Points(starsGeometry, starsMaterial); scene.add(stars);
-        const pLight = new THREE.PointLight(0xbd00ff, 4, 700); pLight.position.set(250, 150, 150); scene.add(pLight);
-        const bLight = new THREE.PointLight(0x00f2ff, 4, 700); bLight.position.set(-250, -150, 150); scene.add(bLight);
+        const starsMaterial = new THREE.PointsMaterial({ 
+            color: 0xffffff, size: 2.0, map: createCircleTexture(), 
+            transparent: true, opacity: 0.8, depthWrite: false, 
+            blending: THREE.AdditiveBlending 
+        });
+        const stars = new THREE.Points(starsGeometry, starsMaterial);
+        scene.add(stars);
+
+        const pLight = new THREE.PointLight(0xbd00ff, 3, 800); pLight.position.set(200, 100, 100); scene.add(pLight);
+        const bLight = new THREE.PointLight(0x00f2ff, 3, 800); bLight.position.set(-200, -100, 100); scene.add(bLight);
+        
         scene.fog = new THREE.FogExp2(0x010103, 0.002);
         camera.position.z = 5;
-        function animate() { requestAnimationFrame(animate); stars.rotation.y += 0.0004; stars.rotation.x += 0.0001; const time = Date.now() * 0.0005; pLight.position.x = Math.sin(time) * 300; bLight.position.y = Math.cos(time) * 300; renderer.render(scene, camera); }
-        window.addEventListener('resize', () => { camera.aspect = window.innerWidth / window.innerHeight; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, window.innerHeight); }); animate();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            stars.rotation.y += 0.0003;
+            stars.rotation.x += 0.0001;
+            const time = Date.now() * 0.0005;
+            pLight.position.x = Math.sin(time) * 250;
+            bLight.position.y = Math.cos(time) * 250;
+            renderer.render(scene, camera);
+        }
+
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        animate();
     </script>
 </body>
 </html>
