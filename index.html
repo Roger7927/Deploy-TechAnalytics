@@ -49,7 +49,14 @@
             font-size: clamp(1.5rem, 4vw, 2.5rem); letter-spacing: clamp(4px, 1.2vw, 12px);
             background: linear-gradient(90deg, var(--neon-blue), var(--neon-purple));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin-bottom: 50px; text-transform: uppercase; font-weight: 800;
+            margin-bottom: 20px; text-transform: uppercase; font-weight: 800;
+        }
+
+        /* DISCLAIMER AMAZON (New Detail) */
+        .amazon-disclosure {
+            color: #666; font-size: 0.65rem; margin-bottom: 30px; 
+            max-width: 700px; margin-left: auto; margin-right: auto;
+            line-height: 1.4; text-transform: uppercase; letter-spacing: 1px;
         }
 
         /* GRID ESTÁVEL (A Esteira) */
@@ -91,14 +98,12 @@
         .product-img {
             max-height: 160px; max-width: 90%;
             object-fit: contain;
-            /* LUZ ARREDONDADA: Drop-shadow cria contorno suave, não quadrado */
             filter: drop-shadow(0 0 15px rgba(0, 242, 255, 0.2));
             transition: 0.5s ease;
         }
 
         .unit-card:hover .product-img { 
             transform: scale(1.05);
-            /* BRILHO NEON PROFISSIONAL NO HOVER */
             filter: drop-shadow(0 0 25px var(--neon-blue));
         }
 
@@ -113,6 +118,7 @@
         
         .price { font-size: 1.9rem; color: #fff; font-weight: 800; margin: 15px 0; }
         .price span { font-size: 0.9rem; color: var(--neon-blue); margin-right: 4px; }
+        .price-note { font-size: 0.55rem; color: #555; display: block; margin-top: -10px; }
 
         button {
             background: transparent; border: 1.5px solid var(--neon-blue);
@@ -142,41 +148,47 @@
         <div class="tactical-core">
             <h1>TECH ANALYTICS</h1>
             
+            <p class="amazon-disclosure">Participamos do Programa de Associados da Amazon. Como associado, recebemos comissões por compras qualificadas. Preços e disponibilidade sujeitos a alteração pela loja.</p>
+            
             <div class="showcase">
-                <a href="https://amzn.to/4uBoZMz" target="_blank" class="unit-card">
+                <a href="https://amzn.to/4uBoZMz" target="_blank" rel="sponsored nofollow" class="unit-card">
                     <div class="badge">Cupom Ativo</div>
                     <div class="unit-id">[ S26-U ]</div>
                     <div class="img-container"><img src="assets/s26.png" class="product-img" alt="S26 Ultra"></div>
                     <h3>SAMSUNG S26 ULTRA</h3>
                     <div class="price"><span>R$</span> 9.500,00</div>
-                    <button>ADQUIRIR UNIDADE</button>
+                    <span class="price-note">*Consulte o valor atual na Amazon</span>
+                    <button>VERIFICAR DISPONIBILIDADE</button>
                 </a>
 
-                <a href="https://amzn.to/4lxFPI0" target="_blank" class="unit-card">
+                <a href="https://amzn.to/4lxFPI0" target="_blank" rel="sponsored nofollow" class="unit-card">
                     <div class="badge">Frete Grátis</div>
                     <div class="unit-id">[ IP17-P ]</div>
                     <div class="img-container"><img src="assets/iphone17.png" class="product-img" alt="iPhone 17"></div>
                     <h3>IPHONE 17 PRO MAX</h3>
                     <div class="price"><span>R$</span> 11.249,10</div>
-                    <button>ADQUIRIR UNIDADE</button>
+                    <span class="price-note">*Consulte o valor atual na Amazon</span>
+                    <button>VERIFICAR DISPONIBILIDADE</button>
                 </a>
 
-                <a href="https://amzn.to/3PLEEJ6" target="_blank" class="unit-card">
+                <a href="https://amzn.to/3PLEEJ6" target="_blank" rel="sponsored nofollow" class="unit-card">
                     <div class="badge">ELETRO500</div>
                     <div class="unit-id">[ S25-U ]</div>
                     <div class="img-container"><img src="assets/s25.png" class="product-img" alt="S25 Ultra"></div>
                     <h3>SAMSUNG S25 ULTRA</h3>
                     <div class="price"><span>R$</span> 6.595</div>
-                    <button>ADQUIRIR UNIDADE</button>
+                    <span class="price-note">*Consulte o valor atual na Amazon</span>
+                    <button>VERIFICAR DISPONIBILIDADE</button>
                 </a>
 
-                <a href="https://amzn.to/41clhLN" target="_blank" class="unit-card">
+                <a href="https://amzn.to/41clhLN" target="_blank" rel="sponsored nofollow" class="unit-card">
                     <div class="badge">Titânio Deserto</div>
                     <div class="unit-id">[ IP16-P ]</div>
                     <div class="img-container"><img src="assets/iphone16.png" class="product-img" alt="iPhone 16"></div>
                     <h3>IPHONE 16 PRO MAX</h3>
                     <div class="price"><span>R$</span> 12.499</div>
-                    <button>ADQUIRIR UNIDADE</button>
+                    <span class="price-note">*Consulte o valor atual na Amazon</span>
+                    <button>VERIFICAR DISPONIBILIDADE</button>
                 </a>
             </div>
 
